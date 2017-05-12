@@ -1,0 +1,13 @@
+export ISDEV="false"
+export SUPPORT_HTTPS="false"
+export PROTOCOL_PREFIX="https"
+export PORT="4000"
+export HOST="localhost"
+export SESSIONID="koa:sess"
+export BASE_URL="https://localhost:8080"
+export WEBPACK_BASE_URL="https://localhost:8080"
+export DB_URL="mysql://root:@localhost:3306/test_reactest"
+export GITHUB_CLIENT_ID=""
+export GITHUB_CLIENT_SECRET=""
+export GITHUB_CALLBACK_URL="http://localhost:3000/auth/github/callback"
+
