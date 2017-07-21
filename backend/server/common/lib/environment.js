@@ -3,6 +3,7 @@ const habitat = require('habitat');
 const log = require('./logger');
 const env = new habitat();
 const mongojs = require('mongojs');
+import path from 'path';
 
 if (process.env.NODE_ENV !== 'test') {
   if (process.env.NODE_ENV === 'stage') {
@@ -12,10 +13,10 @@ if (process.env.NODE_ENV !== 'test') {
   } else {
     habitat.load(require('path').resolve(__dirname, '../../../config/.env'));
   }
-  env._db = mongojs(env.get('DB_URL'), [env.get('APP_TABLE') || 'lists']);
+  env._db = mongojs(process.env.DB_URL, [process.env.APP_TABLE || 'lists']);
+  habitat.load(path.resolve(__dirname, '../../../config/.env.test'));
 } else {
-  habitat.load(require('path').resolve(__dirname, '../../../config/.env.test'));
-  env._db = mongojs(env.get('DB_URL_TEST'), [env.get('APP_TABLE') || 'lists']);
+  env._db = mongojs(process.env.DB_URL_TEST, [process.env.APP_TABLE || 'lists']);
 }
 
 module.exports = env;

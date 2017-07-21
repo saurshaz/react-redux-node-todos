@@ -22,6 +22,7 @@ module.exports = (app, passport) => {
   app.get('/lists', (req, res) => {
     api._getAllLists({})
       .then((data) => {
+        console.log(data);
         res.json({data});
       }, (err) => {
         console.error(err);
