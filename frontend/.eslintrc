@@ -1,22 +1,32 @@
 {
-  "extends": "hardcore-react",
   "parser": "babel-eslint",
-  "rules": {
-    "linebreak-style": [0, "unix"],
-    "no-debugger": [1],
-    "no-restricted-syntax": [1],
-    "fp/no-mutation": [0, {
-      "commonjs": true,
-      "allowThis": true,
-      "exceptions": [
-        {"object": "foo", "property": "bar"}
-      ]
-    }]
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
   },
-  "globals": {
-    "describe": true,
-    "it": true,
-    "path": true,
-    "ga": true
+  "extends": "airbnb",
+  "rules": {
+    "comma-dangle": ["off"],
+    "import/extensions": 0,
+    "no-unused-vars": ["warn"],
+    "object-curly-spacing": ["off"],
+    "padded-blocks": ["off"],
+    "react/jsx-closing-bracket-location": ["off"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-space-before-closing": ["off"],
+    "react/prefer-stateless-function": ["off"],
+    "no-underscore-dangle": [ "error", { "allowAfterThis": true }],
+    "import/no-unresolved": ["error", {
+        "ignore": [
+          "config",
+          "components/",
+          "stores/",
+          "actions/",
+          "sources/",
+          "styles/",
+          "images/"
+        ]
+    }]
   }
 }

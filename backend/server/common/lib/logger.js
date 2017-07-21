@@ -1,48 +1,43 @@
-
-
 /*
- * Wrapper for logging server messages at different log levels
+* Wrapper for logging server messages at different log levels
 */
-const Hoek = require('hoek');
-const bunyan = require('bunyan');
-const PrettyStream = require('bunyan-prettystream');
+import Hoek from 'hoek';
+import bunyan from 'bunyan';
+import PrettyStream from 'bunyan-prettystream';
 
 Hoek.assert(process.env.LOG_LEVEL, 'Must define LOG_LEVEL');
 
 const stream = new PrettyStream();
+
 stream.pipe(process.stdout);
 
-function requestSerializer(req) {
-  return {
-    path: req.path,
-    method: req.method,
-    headers: req.headers
-  };
-}
+const requestSerializer = (req) => ({
+  path: req.path,
+  method: req.method,
+  headers: req.headers,
+});
 
 function responseSerializer(res) {
   return {
-    payload: res.output.payload
+    payload: res.output.payload,
   };
 }
 
 function errorSerializer(error) {
-  if (!error) {
-    return;
+  if (error) {
+    if (typeof error === 'string') {
+      return {
+        message: error,
+      };
+    }
+// The `message` property of an Error object isn't enumerable,
+// so we clone the object and attach it to make sure it's logged
+    const serializedData = JSON.parse(JSON.stringify(error));
+
+    serializedData.message = error.message;
+
+    return serializedData;
   }
-
-  if (typeof error === 'string') {
-    return {
-      message: error
-    };
-  }
-
-  // The `message` property of an Error object isn't enumerable,
-  // so we clone the object and attach it to make sure it's logged
-  const serializedData = JSON.parse(JSON.stringify(error));
-  serializedData.message = error.message;
-
-  return serializedData;
 }
 
 module.exports = bunyan.createLogger({
@@ -51,7 +46,7 @@ module.exports = bunyan.createLogger({
   serializers: {
     request: requestSerializer,
     response: responseSerializer,
-    error: errorSerializer
+    error: errorSerializer,
   },
-  stream
+  stream,
 });

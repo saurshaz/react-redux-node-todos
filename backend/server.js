@@ -1,19 +1,19 @@
 
+import express from 'express';
 
-const env = require('./server/common/lib/environment');
-const log = require('./server/common/lib/logger');
-const express = require('express');
+import env from './server/common/lib/environment';
+import log from './server/common/lib/logger';
+
 const app = express();
-const passport = require('passport');
 
 app.set('logger', log);
 app.set('env', env);
 
 // Bootstrap application settings
-require('./server/common/express')(app, passport);
+require('./server/common/express')(app);
 
 // Bootstrap routes
-require('./server/common/routes')(app, passport);
+require('./server/common/routes')(app);
 
 app.listen(app.get('APP_PORT') || 3000, () => {
   log.info('started app at ', env.get('APP_PORT'), ' in ', env.get('NODE_ENV'));
