@@ -50,9 +50,9 @@
   },
   "scripts": {
     "test": "LOG_LEVEL=info NODE_ENV=development ./node_modules/.bin/mocha  test/**/*.test.js --timeout 88000",
-    "start": "node server.js",
+    "start": "LOG_LEVEL=info node server.js",
     "lint": "eslint ./server",
-    "dev": "LOG_LEVEL=info NODE_ENV=development DEBUG=swagger:* supervisor --debug  server.js"
+    "dev": "LOG_LEVEL=info NODE_ENV=development DEBUG=swagger:* supervisor --inspect  server.js"
   },
   "author": "saurshaz",
   "license": "ISC"

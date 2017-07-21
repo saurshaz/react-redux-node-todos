@@ -165,12 +165,6 @@ class WebpackBaseConfig {
             ],
           },
           {
-            test: /\.js$/,
-            loader: 'eslint-loader',
-            exclude: /node_modules|bower_components|vendorModules/,
-            include: path.resolve('./../'),
-          },
-          {
             test: /\.cssmodule\.less$/,
             loaders: [
                             { loader: 'style-loader' },

@@ -7,6 +7,8 @@ import * as actionsObj from '../../state-management/actions';
 
 import './style.css';
 
+const ZERO = 0;
+
 class TodoItemList extends Component {
   componentDidMount() {
     this.props.actions.api.getItemsForList({});
@@ -40,6 +42,10 @@ class TodoItemList extends Component {
       ));
 
       body.section = (<section>{listContent}</section>);
+    }
+
+    if (app.data && (app.data.length === ZERO)) {
+      return (<span>{' No Data Found'}</span>);
     }
 
     return (<span>{body.section}</span>);
