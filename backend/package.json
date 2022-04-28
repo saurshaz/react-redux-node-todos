@@ -4,7 +4,7 @@
   "description": "a dockerized version for backend app",
   "main": "server.js",
   "dependencies": {
-    "async": "^2.3.0",
+    "async": "^2.6.4",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.17.1",
     "bunyan": "^1.8.10",
